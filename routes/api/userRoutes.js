@@ -9,7 +9,7 @@ router.route('/')
   .get(getUsers)
   .post(createUser);
 
-router.route('/:userId')
+router.route('/:id')
   .get(getSingleUser);
 
 module.exports = router;

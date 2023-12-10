@@ -9,7 +9,7 @@ router.route('/')
   .get(getThoughts)
   .post(createThought);
 
-router.route('/:thoughtId')
+router.route('/:id')
   .get(getSingleThought);
 
 module.exports = router;
