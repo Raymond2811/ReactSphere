@@ -42,4 +42,34 @@ module.exports = {
       res.status(500).json(error);
     }
   },
+  async updateThought (req,res) {
+    try {
+      const updatedThought = await Thought.findByIdAndUpdate(
+        req.params.id,
+        { thoughtText: req.body.thoughtText },
+        { new: true }
+      );
+
+      if (!updatedThought) {
+        return res.status(404).json({message: 'No thought found with that ID'});
+      }
+    
+      res.json(updatedThought);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  async deleteThought (req,res) {
+    try {
+      const deletedThought = await Thought.findByIdAndDelete(req.params.id);
+
+    if(!deletedThought){
+      return res.status(404).json({message:'No thought found with that ID'});
+    }
+
+    res.json({ message: 'Thought successfully deleted', deletedThought});
+    } catch (error){
+      res.status(500).json(error);
+    }
+  },
 }
