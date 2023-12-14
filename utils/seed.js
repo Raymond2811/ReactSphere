@@ -13,20 +13,19 @@ connection.once('open', async() => {
     await User.deleteMany({});
     await Thought.deleteMany({});
 
-    const createdUsers = await User.insertMany(users);
-    const userMap = {};
-    createdUsers.forEach((user) => {
-      userMap[user.username] = user._id;
+    await User.insertMany(users);
+
+    const createdThoughts = await Thought.insertMany(thoughts);
+    const updateUsers = createdThoughts.map(thought => {
+      return User.findOneAndUpdate(
+        {username: thought.username},
+        { $addToSet: { thoughts: thought._id } },
+        { new: true }
+      );
     });
-
-    const thoughtsWithUserIds = thoughts.map((thought) => ({
-      ...thought,
-      username: userMap[thought.username],
-    }));
-
-    await Thought.insertMany(thoughtsWithUserIds);
-    console.table(users);
-    console.table(thoughtsWithUserIds);
+    const finalUsers = await Promise.all(updateUsers)
+    console.log(finalUsers);
+    console.log(createdThoughts);
     console.log('Data seeded successfully');
     process.exit(0);
   } catch (error) {
