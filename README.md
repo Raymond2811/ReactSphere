@@ -4,7 +4,7 @@
 
 I developed this social network application as a personal challenge to explore implementing MongoDB. The app is designed to provide people who wish to express their thoughts and opinions. During development, I encountered several challenges, the most memorable one was the issue in my seed.js file. Initially, the file struggled to establish connections between users and their respective thoughts. I worked with my tutor and we resolved the issue, ensuring associations between users and their thoughts.
 
-Demo: 
+Demo: https://youtu.be/hvhyO38IiSk?feature=shared
 
 ## Usage
 
